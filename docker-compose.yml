@@ -1,10 +1,18 @@
 version: '3.8'
+
 services:
-  postgres:
-    image: bitnami/postgresql:latest
+  mysql:
+    image: mysql:8.0
+    container_name: runners-mysql
     ports:
-      - '5432:5432'
+      - '3306:3306'
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=runners_api
+      - MYSQL_ROOT_PASSWORD=docker
+      - MYSQL_DATABASE=runners_api
+      - MYSQL_USER=postgres
+      - MYSQL_PASSWORD=docker
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
